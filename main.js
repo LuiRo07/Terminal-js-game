@@ -34,7 +34,7 @@ class Field {
             
             
 // instantiations
-const newField = new Field(fieldPath);
+const startingField = new Field(fieldPath);
 
 // conditions to exit out of main loop
 let win = false;
@@ -46,7 +46,7 @@ let characterPosition = 0;
 console.log('Your hat is somewhere lost, can you find it?')
 
 while (!(win) && !(collision)) {
-    newField.printField();
+    startingField.printField();
     let userDirections = prompt('Which way? ').toLowerCase();
 
     switch (userDirections) {
@@ -68,7 +68,7 @@ while (!(win) && !(collision)) {
             break;
     }
     
-    let currentPosition = newField.field[characterRow][characterPosition]
+    let currentPosition = startingField.field[characterRow][characterPosition]
     
     // collision check
     switch (currentPosition) {
@@ -89,7 +89,7 @@ while (!(win) && !(collision)) {
             break;
 
         default :
-            newField.field[characterRow][characterPosition] = pathCharacter;
+            startingField.field[characterRow][characterPosition] = pathCharacter;
             break;
     }
 } 

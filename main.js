@@ -34,7 +34,7 @@ class Field {
             
             
 // instantiations
-const field1 = new Field(fieldPath);
+const newField = new Field(fieldPath);
 
 // conditions to exit out of main loop
 let win = false;
@@ -46,36 +46,51 @@ let characterPosition = 0;
 console.log('Your hat is somewhere lost, can you find it?')
 
 while (!(win) && !(collision)) {
-    field1.printField();
+    newField.printField();
     let userDirections = prompt('Which way? ').toLowerCase();
-    
-    // move character
-    if (userDirections === 'd' ) {
-        characterRow += 1
-    } else if (userDirections === 'r') {
-        characterPosition += 1
-    } else if (userDirections === 'u') {
-        characterRow -= 1;
-        field1.field[characterRow][characterPosition] = pathCharacter;
-    } else if (userDirections === 'l') {
-        characterPosition -= 1;
+
+    switch (userDirections) {
+
+        case 'd' : 
+            characterRow += 1;
+            break;
+
+        case 'r' : 
+            characterPosition += 1;
+            break;
+
+        case 'u' : 
+            characterRow -= 1;
+            break;
+
+        case 'l' :
+            characterPosition -= 1;
+            break;
     }
     
-    
-    let currentPosition = field1.field[characterRow][characterPosition]
+    let currentPosition = newField.field[characterRow][characterPosition]
     
     // collision check
-    if (currentPosition === hole) {
-        console.log('Oops, you fell into a hole')
-        collision = true;
-    } else if (currentPosition === undefined) {
-        console.log('You went out of bound')
-        collision = true;
-    } else if (currentPosition === hat) {
-        console.log('Congratulations! You found your hat!');
-        win = true;
-    } else {
-        field1.field[characterRow][characterPosition] = pathCharacter;
+    switch (currentPosition) {
+
+        case hole : 
+            console.log('Oops, you fell into a hole');
+            collision = true;
+            break;
+
+        case undefined :
+            console.log('You went out of bound');
+            collision = true;
+            break;
+
+        case hat :
+            console.log('Congratulations! You found your hat!');
+            win = true;
+            break;
+
+        default :
+            newField.field[characterRow][characterPosition] = pathCharacter;
+            break;
     }
 } 
 
